@@ -9,7 +9,7 @@ export default async function Comments({ postSlug }: { postSlug: string }) {
       { next: { revalidate: 5 } }
     );
     const response = await commentsResult.json();
-    console.log(response);
+    console.log(response.comments);
     comments = response.comments.rows;
   } catch (err) {
     console.log(err);
@@ -28,16 +28,18 @@ export default async function Comments({ postSlug }: { postSlug: string }) {
 
         <button type="submit">Send comment</button>
       </form>
-      {/* @ts-ignore */}
-      {comments.map((comment) => {
-        return (
-          <li key={comment.id}>
-            {comment.username} says...
-            <br />
-            {comment.content}
-          </li>
-        );
-      })}
+      <ul>
+        {/* @ts-ignore */}
+        {comments.map((comment) => {
+          return (
+            <li key={comment.id}>
+              {comment.username} says...
+              <br />
+              {comment.content}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
