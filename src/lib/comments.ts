@@ -8,7 +8,7 @@ export async function saveComment(
 ) {
   const uuid = short.generate();
 
-  await sql`INSERT INTO comments (id,slug,username,content) VALUES (${uuid}, ${slug}, ${username}, ${content})`;
+  await sql`INSERT INTO comments (id, slug, username, content) VALUES (${uuid}, ${slug}, ${username}, ${content})`;
 
   return uuid;
 }

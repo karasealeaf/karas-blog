@@ -10,3 +10,7 @@ export async function GET(request: Request) {
 
   return NextResponse.json({ message: "Table created" });
 }
+// catch (error) {
+//   console.log(error);
+
+// }
