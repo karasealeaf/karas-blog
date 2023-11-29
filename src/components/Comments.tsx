@@ -1,21 +1,22 @@
 import { WEB_SITE } from "config";
 
 export default async function Comments({ postSlug }: { postSlug: string }) {
-  const WEB_SITE = "http://localhost:3000";
+  // `/blog/post-1`
 
   let comments = [];
 
   try {
     const commentsResult = await fetch(`${WEB_SITE}/api/comments/${postSlug}`, {
-      next: { revalidate: 5 },
+      next: { revalidate: 0 },
     });
     const response = await commentsResult.json();
-    console.log(response.comments);
     comments = response.comments.rows;
+    console.log(response.comments);
   } catch (err) {
     console.log(err);
   }
 
+  console.log(comments);
   return (
     <div>
       <h2>| Comments |</h2>
@@ -32,11 +33,12 @@ export default async function Comments({ postSlug }: { postSlug: string }) {
           rows={10}
           className="text-neutral-900"
         />
-        <button type="submit">Send comment</button>
+
+        <button type="submit">send comment</button>
       </form>
-{/* @ts-ignore */}
-      {comments.map(
-        (comment: { id: string; comment: string; username: string; content: string }) => {
+      <ul>
+        {/* @ts-ignore */}
+        {comments.map((comment) => {
           return (
             <li key={comment.id}>
               {comment.username} says...
@@ -44,8 +46,8 @@ export default async function Comments({ postSlug }: { postSlug: string }) {
               {comment.content}
             </li>
           );
-        }
-      )}
+        })}
+      </ul>
     </div>
   );
 }

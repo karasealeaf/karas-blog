@@ -1,3 +1,5 @@
+// app/blog/[slug]/page.tsx
+
 import Comments from "@/components/Comments";
 import { getPosts, getPostBySlug } from "@/lib/posts";
 import { notFound } from "next/navigation";
@@ -7,6 +9,9 @@ type BlogPostParams = {
     slug: string;
   };
 };
+
+// slug : 'thesearemyparams'
+// localhost:3000/blog/thesearemyparams
 
 // this builds all the params for ALL blog posts when the website is deployed
 export function generateStaticParams() {
@@ -27,7 +32,7 @@ export default function BlogPost({ params }: BlogPostParams) {
   }
 
   return (
-    <div>
+    <div className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>{post.title}</h1>
       <div
         dangerouslySetInnerHTML={{ __html: post.body.html }}
