@@ -1,3 +1,5 @@
+import {WEB_SITE} from 'config'
+
 export default async function Comments({ postSlug }: { postSlug: string }) {
   const WEBSITE_URL = "http://localhost:3000";
 
@@ -5,7 +7,7 @@ export default async function Comments({ postSlug }: { postSlug: string }) {
 
   try {
     const commentsResult = await fetch(
-      `${WEBSITE_URL}/api/comments/${postSlug}`,
+      `${WEB_SITE}/api/comments/${postSlug}`,
       { next: { revalidate: 5 } }
     );
     const response = await commentsResult.json();
@@ -35,7 +37,7 @@ export default async function Comments({ postSlug }: { postSlug: string }) {
       </form>
 
       {/* @ts-ignore */}
-      
+
       {comments.map((comment) => {
         return (
           <li key={comment.id}>
