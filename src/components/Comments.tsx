@@ -1,15 +1,14 @@
-import {WEB_SITE} from 'config'
+import { WEB_SITE } from "config";
 
 export default async function Comments({ postSlug }: { postSlug: string }) {
-  const WEBSITE_URL = "http://localhost:3000";
+  const WEB_SITE = "http://localhost:3000";
 
   let comments = [];
 
   try {
-    const commentsResult = await fetch(
-      `${WEB_SITE}/api/comments/${postSlug}`,
-      { next: { revalidate: 5 } }
-    );
+    const commentsResult = await fetch(`${WEB_SITE}/api/comments/${postSlug}`, {
+      next: { revalidate: 5 },
+    });
     const response = await commentsResult.json();
     console.log(response.comments);
     comments = response.comments.rows;
@@ -35,18 +34,18 @@ export default async function Comments({ postSlug }: { postSlug: string }) {
         />
         <button type="submit">Send comment</button>
       </form>
-
-      {/* @ts-ignore */}
-
-      {comments.map((comment) => {
-        return (
-          <li key={comment.id}>
-            {comment.username} says...
-            <br />
-            {comment.content}
-          </li>
-        );
-      })}
+{/* @ts-ignore */}
+      {comments.map(
+        (comment: { id: string; comment: string; username: string; content: string }) => {
+          return (
+            <li key={comment.id}>
+              {comment.username} says...
+              <br />
+              {comment.content}
+            </li>
+          );
+        }
+      )}
     </div>
   );
 }
