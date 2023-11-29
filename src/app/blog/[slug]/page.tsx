@@ -39,7 +39,7 @@ export default function BlogPost({ params }: BlogPostParams) {
         className="prose dark:prose-invert"
       ></div>
       {/* @ts-ignore */}
-      <Comments postSlug={params.slug} />
+      <Comments postSlug={params.slug}></Comments>
     </div>
   );
 }
